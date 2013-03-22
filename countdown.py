@@ -8,13 +8,14 @@ def parse_time(time):
     remaining = time
     if 'h' in time:
         h = time.split('h')[0]
-        remaining = time.split('h')[1:]
+        remaining = ''.join(time.split('h')[1:])
     else: h = 0
+    print remaining 
     if 'm' in remaining:
         m = remaining.split('m')[0] 
-        remaining = time.split('m')[1:]
+        remaining = ''.join(time.split('m')[1:])
     else: m = 0
-    s = remaining[0] if remaining else 0
+    s = remaining if remaining else 0
     return [int(h), int(m), int(s)]
 
 def display_time_tuple(tup):
@@ -32,23 +33,20 @@ def decr_time(time):
         time[0] -= 1
         time[1] = 59
     else:
-        time = (0,0,0)
+        time = [0,0,0]
     return time
 
 def timer(time, func=None):
-    ''' takes a time tuple and an action for when time runs out '''
-    
+    ''' takes a time list and an action for when time runs out '''
+
     os.system('cls' if os.name=='nt' else 'clear')
     print display_time_tuple(time)
-    if time == (0,0,0):
+    if time == [0,0,0]:
         print "done"
         if func: func()
     else:
         sleep(1)
         timer(decr_time(time),func)
-
-def fun():
-    print "woot!"
 
 def signal_handler(signal, frame):
     sys.exit('timer interrupted')
