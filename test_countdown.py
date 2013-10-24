@@ -20,7 +20,7 @@ class Test_Countdown(unittest.TestCase):
         time = [1,3,0]
         self.assertEqual(decr_time(time), [1,2,59])
         time = [1,0,0]
-        self.assertEqual(decr_time(time), [0,59,0])
+        self.assertEqual(decr_time(time), [0,59,59])
 
 if __name__ == '__main__':
     unittest.main()
